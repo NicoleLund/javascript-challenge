@@ -39,6 +39,7 @@ function filterData() {
     // Get filter inputs
     var dateFilter = d3.select("#datetime").property("value");
     var cityFilter = d3.select("#city").property("value");
+    var stateFilter = d3.select("#state").property("value");
 
     // Filter tableData
     var filteredData = tableData;
@@ -47,6 +48,10 @@ function filterData() {
     };
     if (cityFilter !== "") {
         var filteredData = filteredData.filter(sighting => sighting.city == cityFilter.toLowerCase());
+    };
+    
+    if (stateFilter !== "") {
+        var filteredData = filteredData.filter(sighting => sighting.state == stateFilter.toLowerCase());
     };
 
     console.log(filteredData);
