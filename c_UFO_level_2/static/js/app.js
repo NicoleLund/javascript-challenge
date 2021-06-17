@@ -41,6 +41,7 @@ function filterData() {
     var cityFilter = d3.select("#city").property("value");
     var stateFilter = d3.select("#state").property("value");
     var countryFilter = d3.select("#country").property("value");
+    var shapeFilter = d3.select("#shape").property("value");
 
     // Filter tableData
     var filteredData = tableData;
@@ -63,6 +64,11 @@ function filterData() {
     // if (countryFilter.toLowerCase() === "not us") {
     //     var filteredData = filteredData.filter(sighting => sighting.country !== "us");
     // };
+
+
+    if (shapeFilter !== "") {
+        var filteredData = filteredData.filter(sighting => sighting.shape === shapeFilter.toLowerCase());
+    };
 
 
     // remove existing table data
