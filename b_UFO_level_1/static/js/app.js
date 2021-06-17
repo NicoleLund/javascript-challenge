@@ -1,8 +1,18 @@
 // from data.js
 var tableData = data;
 
-// reference the table body
+// reference to the table body
 var tbody = d3.select("tbody");
+
+// reference to the filter input
+var dateFilter = d3.select("#form");
+
+// reference to the button input
+var filterButton = d3.select("#filter-btn")
+
+// initialize event handlers
+dateFilter.on("submit", filterData);
+filterButton.on("click", filterData);
 
 // Add data to table body
 tableData.forEach((sighting) => {
@@ -12,3 +22,9 @@ tableData.forEach((sighting) => {
         cell.text(value);
     });
 });
+
+// Collect the filter input
+function filterData() {
+    var filterText = d3.select("#datetime").property("value");
+    console.log(filterText);
+};
