@@ -40,21 +40,30 @@ function filterData() {
     var dateFilter = d3.select("#datetime").property("value");
     var cityFilter = d3.select("#city").property("value");
     var stateFilter = d3.select("#state").property("value");
+    var countryFilter = d3.select("#country").property("value");
 
     // Filter tableData
     var filteredData = tableData;
     if (dateFilter !== "") {
         var filteredData = filteredData.filter(sighting => sighting.datetime === dateFilter);
     };
+
     if (cityFilter !== "") {
-        var filteredData = filteredData.filter(sighting => sighting.city == cityFilter.toLowerCase());
+        var filteredData = filteredData.filter(sighting => sighting.city === cityFilter.toLowerCase());
     };
     
     if (stateFilter !== "") {
-        var filteredData = filteredData.filter(sighting => sighting.state == stateFilter.toLowerCase());
+        var filteredData = filteredData.filter(sighting => sighting.state === stateFilter.toLowerCase());
     };
 
-    console.log(filteredData);
+    if (countryFilter !== "") {
+        var filteredData = filteredData.filter(sighting => sighting.country === countryFilter.toLowerCase());
+    };
+
+    // if (countryFilter.toLowerCase() === "not us") {
+    //     var filteredData = filteredData.filter(sighting => sighting.country !== "us");
+    // };
+
 
     // remove existing table data
     d3.select("tbody").remove();
