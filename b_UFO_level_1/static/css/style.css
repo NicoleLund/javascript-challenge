@@ -8,7 +8,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: #e195e1;
+  background-color: #5db66a;
 }
 
 /* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
@@ -26,7 +26,7 @@ body {
   bottom: 0;
   left: 0;
   min-height: 100px;
-  background-color: #e195e1;
+  background-color: #5db66a;
 }
 
 /* The code styles the text at the bottom of the footer */
@@ -36,13 +36,13 @@ body {
   bottom: 0;
   left: 0;
   padding: 5px;
-  background-color: #c055c0;
+  background-color: #0c871f;
 }
 
 .navbar {
   padding: 5px;
   margin: 0;
-  background-color: #c055c0;
+  background-color: #0c871f;
 }
 
 /* This CSS styles the ufo icon in the navbar */
