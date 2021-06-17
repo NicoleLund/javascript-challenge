@@ -36,12 +36,19 @@ function filterData() {
     // Prevent the page from refreshing
     d3.event.preventDefault();
     
-    // Get datetime filter input
-    var filterText = d3.select("#datetime").property("value");
-    console.log(filterText);
+    // Get filter inputs
+    var dateFilter = d3.select("#datetime").property("value");
+    var cityFilter = d3.select("#city").property("value");
 
-    // Filter tableData on datetime
-    var filteredData = tableData.filter(sighting => sighting.datetime === filterText);
+    // Filter tableData
+    var filteredData = tableData;
+    if (dateFilter !== "") {
+        var filteredData = filteredData.filter(sighting => sighting.datetime === dateFilter);
+    };
+    if (cityFilter !== "") {
+        var filteredData = filteredData.filter(sighting => sighting.city == cityFilter.toLowerCase());
+    };
+
     console.log(filteredData);
 
     // remove existing table data
