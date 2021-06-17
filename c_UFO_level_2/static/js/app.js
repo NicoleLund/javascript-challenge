@@ -65,7 +65,6 @@ function filterData() {
     //     var filteredData = filteredData.filter(sighting => sighting.country !== "us");
     // };
 
-
     if (shapeFilter !== "") {
         var filteredData = filteredData.filter(sighting => sighting.shape === shapeFilter.toLowerCase());
     };
@@ -79,5 +78,4 @@ function filterData() {
 
     // load table
     loadTable(filteredData);
-
 };
