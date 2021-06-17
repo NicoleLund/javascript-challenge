@@ -23,8 +23,10 @@ tableData.forEach((sighting) => {
     });
 });
 
-// Collect the filter input
+// Filter data table
 function filterData() {
     var filterText = d3.select("#datetime").property("value");
     console.log(filterText);
+    var filteredData = tableData.filter(sighting => sighting.datetime === filterText);
+    console.log(filteredData);
 };
