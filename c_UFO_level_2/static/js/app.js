@@ -26,8 +26,12 @@ var dateFilter = d3.select("#form");
 // reference to the button input
 var filterButton = d3.select("#filter-btn")
 
-// initialize event handlers
-dateFilter.on("submit", filterData);
+// initialize event handler
+dateFilter.on("change", filterData);
+cityFilter.on("change", filterData);
+stateFilter.on("change", filterData);
+countryFilter.on("change", filterData);
+shapeFilter.on("change", filterData);
 filterButton.on("click", filterData);
 
 // Filter data table
@@ -57,13 +61,12 @@ function filterData() {
         var filteredData = filteredData.filter(sighting => sighting.state === stateFilter.toLowerCase());
     };
 
-    if (countryFilter !== "") {
+    if (countryFilter.toLowerCase() === "not us") {
+        var filteredData = filteredData.filter(sighting => sighting.country !== "us");
+    }
+    else if (countryFilter !== "") {
         var filteredData = filteredData.filter(sighting => sighting.country === countryFilter.toLowerCase());
     };
-
-    // if (countryFilter.toLowerCase() === "not us") {
-    //     var filteredData = filteredData.filter(sighting => sighting.country !== "us");
-    // };
 
     if (shapeFilter !== "") {
         var filteredData = filteredData.filter(sighting => sighting.shape === shapeFilter.toLowerCase());
