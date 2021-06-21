@@ -23,9 +23,6 @@ loadTable(tableData);
 // reference to the filter input
 var dateFilter = d3.select("#form");
 
-// reference to the button input
-var filterButton = d3.select("#filter-btn")
-
 // initialize event handler
 dateFilter.on("change", filterData);
 cityFilter.on("change", filterData);
