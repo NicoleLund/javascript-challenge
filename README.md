@@ -15,7 +15,7 @@ Build a responsive webpage that filters table data according to the users input.
 | Webpage | User Interface |
 |----------|
 |HTML|D3.js|
-|Bootstrap|
+|Bootstrap| |
 
 
 ### Source Data and Starter Code
