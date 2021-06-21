@@ -1,10 +1,33 @@
+/* ---------------------------------------------------------
+index.html, app.js, style.css
+----
+
+Written in HTML with Bootstrap and D3.js
+
+By Nicole Lund 
+
+The starter code and data for this challenge was 
+provided and can be reviewed in a_assignment_instructions 
+--------------------------------------------------------- */
+
+// -----------------------
+// Setup references
+// -----------------------
+
 // from data.js
 var tableData = data;
 
 // reference to the table elements
 var table = d3.select("#ufo-table");
 
-// Add data to table body
+// reference to the filter input
+var dateFilter = d3.select("#form");
+
+
+// -----------------------
+// Populate the webpage table
+// -----------------------
+
 function loadTable(data) {
     var tbody = d3.select("tbody");
     data.forEach((sighting) => {
@@ -16,14 +39,13 @@ function loadTable(data) {
     });
 };
 
-// Load full data table
+// Load full data table on initial load
 loadTable(tableData);
 
 
-// reference to the filter input
-var dateFilter = d3.select("#form");
-
-// initialize event handler
+// -----------------------
+// initialize event handlers
+// -----------------------
 dateFilter.on("change", filterData);
 cityFilter.on("change", filterData);
 stateFilter.on("change", filterData);
@@ -31,20 +53,25 @@ countryFilter.on("change", filterData);
 shapeFilter.on("change", filterData);
 filterButton.on("click", filterData);
 
-// Filter data table
+
+// -----------------------
+// Filter the data upon form change 
+// and repopulate the webpage table
+// -----------------------
+
 function filterData() {
     
     // Prevent the page from refreshing
     d3.event.preventDefault();
     
-    // Get filter inputs
+    // Get all filter inputs
     var dateFilter = d3.select("#datetime").property("value");
     var cityFilter = d3.select("#city").property("value");
     var stateFilter = d3.select("#state").property("value");
     var countryFilter = d3.select("#country").property("value");
     var shapeFilter = d3.select("#shape").property("value");
 
-    // Filter tableData
+    // Filter tableData for all selections
     var filteredData = tableData;
     if (dateFilter !== "") {
         var filteredData = filteredData.filter(sighting => sighting.datetime === dateFilter);
@@ -76,6 +103,6 @@ function filterData() {
     // add table body back
     table.append("tbody");
 
-    // load table
+    // reload table
     loadTable(filteredData);
 };
