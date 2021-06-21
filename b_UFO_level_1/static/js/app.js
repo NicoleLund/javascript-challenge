@@ -1,10 +1,33 @@
+/* ---------------------------------------------------------
+index.html, app.js, style.css
+----
+
+Written in HTML with Bootstrap and D3.js
+
+By Nicole Lund 
+
+The starter code and data for this challenge was 
+provided and can be reviewed in a_assignment_instructions 
+--------------------------------------------------------- */
+
+// -----------------------
+// Setup references
+// -----------------------
+
 // from data.js
 var tableData = data;
 
 // reference to the table elements
 var table = d3.select("#ufo-table");
 
-// Add data to table body
+// reference to the filter input
+var dateFilter = d3.select("#form");
+
+
+// -----------------------
+// Populate the webpage table
+// -----------------------
+
 function loadTable(data) {
     var tbody = d3.select("tbody");
     data.forEach((sighting) => {
@@ -16,33 +39,34 @@ function loadTable(data) {
     });
 };
 
-// Load full data table
+// Load full data table on initial load
 loadTable(tableData);
 
 
-// reference to the filter input
-var dateFilter = d3.select("#form");
+// -----------------------
+// initialize event handler
+// -----------------------
+dateFilter.on("change", filterData);
 
-// reference to the button input
-var filterButton = d3.select("#filter-btn")
 
-// initialize event handlers
-dateFilter.on("submit", filterData);
-filterButton.on("click", filterData);
+// -----------------------
+// Filter the data upon form change 
+// and repopulate the webpage table
+// -----------------------
 
-// Filter data table
 function filterData() {
     
     // Prevent the page from refreshing
     d3.event.preventDefault();
     
-    // Get datetime filter input
-    var filterText = d3.select("#datetime").property("value");
-    console.log(filterText);
+    // Get filter input
+    var dateFilter = d3.select("#datetime").property("value");
 
-    // Filter tableData on datetime
-    var filteredData = tableData.filter(sighting => sighting.datetime === filterText);
-    console.log(filteredData);
+    // Filter tableData for selection
+    var filteredData = tableData;
+    if (dateFilter !== "") {
+        var filteredData = filteredData.filter(sighting => sighting.datetime === dateFilter);
+    };
 
     // remove existing table data
     d3.select("tbody").remove();
@@ -50,7 +74,6 @@ function filterData() {
     // add table body back
     table.append("tbody");
 
-    // load table
+    // reload table
     loadTable(filteredData);
-
 };
