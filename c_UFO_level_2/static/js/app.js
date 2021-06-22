@@ -21,7 +21,7 @@ var tableData = data;
 var table = d3.select("#ufo-table");
 
 // reference to the filter input
-var dateFilter = d3.select("#form");
+var filter = d3.select("#form");
 
 
 // -----------------------
@@ -44,14 +44,9 @@ loadTable(tableData);
 
 
 // -----------------------
-// initialize event handlers
+// initialize event handler
 // -----------------------
-dateFilter.on("change", filterData);
-cityFilter.on("change", filterData);
-stateFilter.on("change", filterData);
-countryFilter.on("change", filterData);
-shapeFilter.on("change", filterData);
-filterButton.on("click", filterData);
+filter.on("change", filterData);
 
 
 // -----------------------
