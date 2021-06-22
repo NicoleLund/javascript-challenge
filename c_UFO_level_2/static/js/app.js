@@ -20,14 +20,9 @@ var tableData = data;
 // reference to the table elements
 var table = d3.select("#ufo-table");
 
-// reference to the filter input
-var filter = d3.select("#form");
-
-
 // -----------------------
 // Populate the webpage table
 // -----------------------
-
 function loadTable(data) {
     var tbody = d3.select("tbody");
     data.forEach((sighting) => {
@@ -39,65 +34,49 @@ function loadTable(data) {
     });
 };
 
-// Load full data table on initial load
-loadTable(tableData);
-
-
-// -----------------------
-// initialize event handler
-// -----------------------
-filter.on("change", filterData);
-
-
 // -----------------------
 // Filter the data upon form change 
 // and repopulate the webpage table
 // -----------------------
-
 function filterData() {
-    
     // Prevent the page from refreshing
     d3.event.preventDefault();
     
     // Get all filter inputs
-    var dateFilter = d3.select("#datetime").property("value");
-    var cityFilter = d3.select("#city").property("value");
-    var stateFilter = d3.select("#state").property("value");
-    var countryFilter = d3.select("#country").property("value");
-    var shapeFilter = d3.select("#shape").property("value");
+    var filterValues = {
+        datetime: d3.select("#datetime").property("value"),
+        city: d3.select("#city").property("value"),
+        state: d3.select("#state").property("value"),
+        country: d3.select("#country").property("value"),
+        shape: d3.select("#shape").property("value")
+    };
+    console.log(filterValues);
 
     // Filter tableData for all selections
     var filteredData = tableData;
-    if (dateFilter !== "") {
-        var filteredData = filteredData.filter(sighting => sighting.datetime === dateFilter);
-    };
+    Object.entries(filterValues).forEach(([key, value]) => {
+        if (key === 'country' && value.toLowerCase() === "not us") {
+            console.log(`Filtering on [Key: ${key}, Value: ${value}]`);
+            filteredData = filteredData.filter(sighting => sighting[key] !== "us");
+        }
+        else if (value.toLowerCase() !== "not us" && value.toLowerCase() !== "") {
+            console.log(`Filtering on [Key: ${key}, Value: ${value}]`);
+            filteredData = filteredData.filter(sighting => sighting[key] === value.toLowerCase());
+        };
+    });
 
-    if (cityFilter !== "") {
-        var filteredData = filteredData.filter(sighting => sighting.city === cityFilter.toLowerCase());
-    };
-    
-    if (stateFilter !== "") {
-        var filteredData = filteredData.filter(sighting => sighting.state === stateFilter.toLowerCase());
-    };
-
-    if (countryFilter.toLowerCase() === "not us") {
-        var filteredData = filteredData.filter(sighting => sighting.country !== "us");
-    }
-    else if (countryFilter !== "") {
-        var filteredData = filteredData.filter(sighting => sighting.country === countryFilter.toLowerCase());
-    };
-
-    if (shapeFilter !== "") {
-        var filteredData = filteredData.filter(sighting => sighting.shape === shapeFilter.toLowerCase());
-    };
-
-
-    // remove existing table data
+    // remove existing table data and reload table
     d3.select("tbody").remove();
-
-    // add table body back
     table.append("tbody");
-
-    // reload table
     loadTable(filteredData);
 };
+
+// -----------------------
+// Load full data table on initial load
+// -----------------------
+loadTable(tableData);
+
+// -----------------------
+// initialize event handler
+// -----------------------
+d3.select("#form").on("change", filterData);
