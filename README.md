@@ -33,6 +33,6 @@ Inital Webpage load
 ![unfiltered table](d_images/unfiltered_table.jpg)
 
 
-Inital Webpage load
+Webpage after user selections
 
 ![unfiltered table](d_images/filtered_table.jpg)
