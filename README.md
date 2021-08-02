@@ -1,4 +1,4 @@
-# javascript-challenge
+# javascript-filters
 
 UofA Data Analytics Bootcamp Homework Assignment 14-Intro-To_Javascript
 
